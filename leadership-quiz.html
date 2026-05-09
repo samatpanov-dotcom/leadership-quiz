@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Какой вы лидер? — Диагностика стиля управления</title>
+<meta name="description" content="10 вопросов — узнайте свой стиль лидерства и точки роста. Бесплатная диагностика от Самата Панова, MBA (Golden Gate University, USA).">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #ffffff;
+    --bg2: #f7f7f5;
+    --bg3: #f0efe9;
+    --text: #1a1a1a;
+    --text2: #555;
+    --text3: #999;
+    --border: rgba(0,0,0,0.10);
+    --border2: rgba(0,0,0,0.18);
+    --blue-bg: #e6f1fb;
+    --blue-text: #185fa5;
+    --green-bg: #e1f5ee;
+    --green-text: #0f6e56;
+    --radius: 12px;
+    --radius-sm: 8px;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: var(--bg3);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 24px 16px 60px;
+  }
+
+  .wrap {
+    max-width: 620px;
+    margin: 0 auto;
+  }
+
+  /* Header */
+  .header {
+    text-align: center;
+    margin-bottom: 32px;
+    padding: 32px 24px;
+    background: var(--bg);
+    border-radius: var(--radius);
+    border: 0.5px solid var(--border);
+  }
+  .header-badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 500;
+    padding: 3px 10px;
+    border-radius: 20px;
+    background: var(--blue-bg);
+    color: var(--blue-text);
+    margin-bottom: 12px;
+    letter-spacing: 0.04em;
+  }
+  .header h1 {
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 1.3;
+    margin-bottom: 10px;
+  }
+  .header p {
+    font-size: 14px;
+    color: var(--text2);
+    line-height: 1.6;
+    margin-bottom: 16px;
+  }
+  .header-meta {
+    font-size: 12px;
+    color: var(--text3);
+  }
+  .header-meta span { margin: 0 6px; }
+
+  /* Progress */
+  .progress-wrap { margin-bottom: 20px; }
+  .progress-top {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: var(--text3);
+    margin-bottom: 6px;
+  }
+  .progress-bar {
+    height: 3px;
+    background: var(--bg3);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: #185fa5;
+    border-radius: 2px;
+    transition: width 0.35s ease;
+  }
+
+  /* Question card */
+  .q-card {
+    background: var(--bg);
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+    margin-bottom: 12px;
+  }
+  .q-num {
+    font-size: 11px;
+    color: var(--text3);
+    margin-bottom: 8px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .q-text {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.5;
+    margin-bottom: 20px;
+  }
+  .options { display: flex; flex-direction: column; gap: 8px; }
+  .opt {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 14px;
+    border-radius: var(--radius-sm);
+    border: 0.5px solid var(--border);
+    background: transparent;
+    cursor: pointer;
+    transition: border-color 0.12s, background 0.12s;
+    width: 100%;
+    text-align: left;
+  }
+  .opt:hover { border-color: var(--border2); background: var(--bg2); }
+  .opt.selected {
+    border-color: #185fa5;
+    background: var(--blue-bg);
+  }
+  .opt-letter {
+    min-width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 0.5px solid var(--border2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--text3);
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .opt.selected .opt-letter {
+    background: #185fa5;
+    color: #fff;
+    border-color: transparent;
+  }
+  .opt-text {
+    font-size: 14px;
+    color: var(--text2);
+    line-height: 1.55;
+  }
+  .opt.selected .opt-text { color: var(--blue-text); }
+
+  /* Nav */
+  .nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 4px;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 20px;
+    border-radius: var(--radius-sm);
+    border: 0.5px solid var(--border2);
+    background: transparent;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text);
+    cursor: pointer;
+    transition: background 0.12s;
+  }
+  .btn:hover { background: var(--bg2); }
+  .btn-primary {
+    background: #185fa5;
+    color: #fff;
+    border-color: transparent;
+  }
+  .btn-primary:hover { background: #1250891; opacity: 0.92; }
+  .btn:disabled { opacity: 0.35; cursor: default; }
+  .warn {
+    font-size: 12px;
+    color: #a32d2d;
+    margin-top: 10px;
+    display: none;
+  }
+
+  /* Result */
+  #result { display: none; }
+  .result-hero {
+    background: var(--bg);
+    border-radius: var(--radius);
+    border: 0.5px solid var(--border);
+    padding: 28px 24px;
+    margin-bottom: 12px;
+  }
+  .result-label {
+    font-size: 11px;
+    color: var(--text3);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 6px;
+    font-weight: 500;
+  }
+  .result-name {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    line-height: 1.3;
+  }
+  .result-desc {
+    font-size: 14px;
+    color: var(--text2);
+    line-height: 1.7;
+    margin-bottom: 20px;
+  }
+  .scores { margin-bottom: 20px; }
+  .score-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+  .score-label { font-size: 12px; color: var(--text2); min-width: 130px; }
+  .score-track { flex: 1; height: 5px; background: var(--bg3); border-radius: 3px; overflow: hidden; }
+  .score-fill { height: 100%; border-radius: 3px; transition: width 0.6s ease; }
+  .score-val { font-size: 12px; font-weight: 500; color: var(--text); min-width: 30px; text-align: right; }
+
+  .traits {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 8px;
+  }
+  .trait {
+    background: var(--bg2);
+    border-radius: var(--radius-sm);
+    padding: 12px;
+  }
+  .trait-icon { font-size: 20px; margin-bottom: 6px; }
+  .trait-name { font-size: 12px; font-weight: 600; margin-bottom: 3px; }
+  .trait-desc { font-size: 11px; color: var(--text2); line-height: 1.5; }
+
+  .cta-card {
+    background: var(--bg);
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+    margin-bottom: 12px;
+  }
+  .cta-card h3 { font-size: 16px; font-weight: 600; margin-bottom: 6px; }
+  .cta-card p { font-size: 14px; color: var(--text2); line-height: 1.6; margin-bottom: 16px; }
+  .cta-btns { display: flex; gap: 8px; flex-wrap: wrap; }
+
+  .author-card {
+    background: var(--bg);
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    display: flex;
+    gap: 16px;
+    align-items: center;
+  }
+  .author-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--blue-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--blue-text);
+    flex-shrink: 0;
+  }
+  .author-name { font-size: 15px; font-weight: 500; margin-bottom: 3px; }
+  .author-bio { font-size: 12px; color: var(--text2); line-height: 1.5; }
+
+  .accent-bar { width: 4px; border-radius: 2px; align-self: stretch; flex-shrink: 0; }
+
+  @media (max-width: 480px) {
+    .header h1 { font-size: 20px; }
+    .q-text { font-size: 15px; }
+    .result-name { font-size: 19px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="header-badge">Бесплатная диагностика</div>
+    <h1>Какой вы лидер?</h1>
+    <p>10 вопросов о реальных рабочих ситуациях. Результат — сразу: ваш стиль управления, сильные стороны и точки роста.</p>
+    <div class="header-meta">
+      <span>⏱ 3–5 минут</span>
+      <span>·</span>
+      <span>10 вопросов</span>
+      <span>·</span>
+      <span>4 профиля лидера</span>
+    </div>
+  </div>
+
+  <!-- Quiz -->
+  <div id="quiz">
+    <div class="progress-wrap">
+      <div class="progress-top">
+        <span id="prog-label">Вопрос 1 из 10</span>
+        <span id="prog-pct">10%</span>
+      </div>
+      <div class="progress-bar"><div class="progress-fill" id="prog-fill" style="width:10%"></div></div>
+    </div>
+
+    <div class="q-card">
+      <p class="q-num" id="q-num">Вопрос 1 из 10</p>
+      <p class="q-text" id="q-text"></p>
+      <div class="options" id="options"></div>
+    </div>
+
+    <p class="warn" id="warn">⚠ Выберите один вариант, чтобы продолжить</p>
+
+    <div class="nav">
+      <button class="btn" id="btn-prev" onclick="prev()">← Назад</button>
+      <button class="btn btn-primary" id="btn-next" onclick="next()">Далее →</button>
+    </div>
+  </div>
+
+  <!-- Result -->
+  <div id="result">
+    <div class="result-hero" id="result-hero">
+      <div style="display:flex;gap:12px;align-items:flex-start;margin-bottom:16px;">
+        <div class="accent-bar" id="accent-bar"></div>
+        <div>
+          <p class="result-label">Ваш стиль лидерства</p>
+          <p class="result-name" id="result-name"></p>
+          <p class="result-desc" id="result-desc"></p>
+        </div>
+      </div>
+      <div class="scores" id="scores"></div>
+      <div class="traits" id="traits"></div>
+    </div>
+
+    <div class="cta-card" id="cta-block"></div>
+
+    <div class="author-card">
+      <div class="author-avatar">СП</div>
+      <div>
+        <p class="author-name">Самат Панов</p>
+        <p class="author-bio">MBA Golden Gate University (США, with distinction) · CC Gold Toastmasters International · 40 речей · Основатель Astana Toastmasters Club · Преподаватель MBA в KAZGUU · Бизнес-тренер, Астана</p>
+      </div>
+    </div>
+
+    <div style="margin-top:12px;">
+      <button class="btn" onclick="restart()" style="width:100%;justify-content:center;">↺ Пройти тест заново</button>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const questions = [
+  {
+    text: "Команда не выполнила план. Ваша первая реакция?",
+    opts: [
+      { text: "Собираю всех, разбираем причины вместе, ищем решение коллективно", type: "D" },
+      { text: "Анализирую данные сам, нахожу причину, даю команде чёткий план исправления", type: "A" },
+      { text: "Говорю с каждым лично, понимаю, что помешало, поддерживаю", type: "C" },
+      { text: "Передаю задачу сильнейшему в команде, не вмешиваюсь в процесс", type: "L" }
+    ]
+  },
+  {
+    text: "Как вы принимаете важное стратегическое решение?",
+    opts: [
+      { text: "Принимаю сам — я несу ответственность, не хочу тратить время команды", type: "A" },
+      { text: "Собираю мнения, потом принимаю решение с учётом обратной связи", type: "D" },
+      { text: "Создаю условия, чтобы команда сама пришла к лучшему решению", type: "C" },
+      { text: "Делегирую тому, кто знает тему лучше меня", type: "L" }
+    ]
+  },
+  {
+    text: "Сотрудник сделал серьёзную ошибку, которая стоила компании денег. Вы?",
+    opts: [
+      { text: "Чётко объясняю, что сделано не так и как должно быть в будущем", type: "A" },
+      { text: "Разбираем ситуацию вместе: что пошло не так и чему он научился", type: "C" },
+      { text: "Обсуждаю с командой — это зона ответственности всех", type: "D" },
+      { text: "Предупреждаю один раз, при повторении — расстаёмся", type: "A" }
+    ]
+  },
+  {
+    text: "Как вы мотивируете свою команду?",
+    opts: [
+      { text: "Чёткие KPI, бонусы за результат, штрафы за нарушения", type: "A" },
+      { text: "Объясняю смысл работы, связываю цели компании с личными целями", type: "C" },
+      { text: "Создаю атмосферу, где людям интересно и они сами хотят расти", type: "D" },
+      { text: "Даю свободу — кто хочет, тот и растёт. Мешаться не буду", type: "L" }
+    ]
+  },
+  {
+    text: "Сотрудник не согласен с вашим решением и говорит об этом открыто. Как вы реагируете?",
+    opts: [
+      { text: "Выслушаю, если аргументы сильные — изменю решение", type: "D" },
+      { text: "Выслушаю, объясню свою логику. Решение остаётся за мной", type: "A" },
+      { text: "Это хорошо. Задаю вопросы, чтобы он сам нашёл лучший ответ", type: "C" },
+      { text: "Он взрослый человек — пусть решает, как ему поступить", type: "L" }
+    ]
+  },
+  {
+    text: "Как часто вы даёте команде обратную связь?",
+    opts: [
+      { text: "По ситуации — когда есть ошибка или успех, стоящий внимания", type: "A" },
+      { text: "Регулярно: еженедельные встречи 1-on-1 с каждым", type: "C" },
+      { text: "На общих встречах команды, чтобы все слышали и учились", type: "D" },
+      { text: "Редко. Профессионалы сами знают, как они работают", type: "L" }
+    ]
+  },
+  {
+    text: "В компании начинаются изменения. Ваши действия?",
+    opts: [
+      { text: "Спускаю план сверху — чётко и быстро, потому что промедление хуже", type: "A" },
+      { text: "Вовлекаю команду в разработку плана изменений с самого начала", type: "D" },
+      { text: "Много говорю с людьми, отвечаю на страхи, поддерживаю психологически", type: "C" },
+      { text: "Сообщаю об изменениях и даю команде самой адаптироваться", type: "L" }
+    ]
+  },
+  {
+    text: "Как вы делегируете задачи?",
+    opts: [
+      { text: "Объясняю что нужно, контролирую каждый этап", type: "A" },
+      { text: "Обсуждаем задачу вместе, договариваемся о контрольных точках", type: "D" },
+      { text: "Уточняю цели человека и стараюсь дать задачу, которая его развивает", type: "C" },
+      { text: "Ставлю задачу и отхожу. Вмешиваюсь только если попросят", type: "L" }
+    ]
+  },
+  {
+    text: "Что для вас главное в команде?",
+    opts: [
+      { text: "Дисциплина и результат. Всё остальное — вторично", type: "A" },
+      { text: "Синхронность — все понимают цель и движутся вместе", type: "D" },
+      { text: "Рост каждого человека — тогда команда становится сильнее", type: "C" },
+      { text: "Профессионализм. Нанимаю лучших и не мешаю им", type: "L" }
+    ]
+  },
+  {
+    text: "Как вы справляетесь с давлением: дедлайны, акционеры, кризис?",
+    opts: [
+      { text: "Ухожу в режим «ручного управления» — всё через меня", type: "A" },
+      { text: "Собираю команду на антикризисный штаб, решаем вместе", type: "D" },
+      { text: "Главное — сохранить команду в ресурсе. Сначала поддержка, потом план", type: "C" },
+      { text: "Верю команде. Мало вмешиваюсь — они справятся", type: "L" }
+    ]
+  }
+];
+
+const profiles = {
+  A: {
+    name: "Директивный лидер",
+    color: "#E24B4A",
+    desc: "Вы — командир. Цените результат, скорость и чёткость. Ваша сила — кризисное управление и ясность целей. Риск: команда не растёт самостоятельно, когда вас нет рядом.",
+    traits: [
+      { icon: "⚡", name: "Скорость решений", desc: "Принимаете быстро, не теряете время в неопределённости" },
+      { icon: "🎯", name: "Ориентация на результат", desc: "KPI и план — ваши главные ориентиры" },
+      { icon: "📈", name: "Зона роста", desc: "Делегирование и доверие самостоятельности команды" }
+    ],
+    cta: "Тренинг научит вас сохранять контроль, давая команде больше автономии — без потери результата. Вы узнаете, как делегировать не задачу, а ответственность."
+  },
+  D: {
+    name: "Демократичный лидер",
+    color: "#185fa5",
+    desc: "Вы — фасилитатор. Вовлекаете команду, ищете консенсус, цените синхронность. Ваша сила — вовлечённость людей. Риск: медлительность при кризисе, размытая ответственность.",
+    traits: [
+      { icon: "👥", name: "Вовлечённость", desc: "Команда чувствует причастность к решениям" },
+      { icon: "💬", name: "Открытый диалог", desc: "Люди могут говорить честно — это редкость" },
+      { icon: "📈", name: "Зона роста", desc: "Скорость и единоличная ответственность в кризисе" }
+    ],
+    cta: "Тренинг даст инструменты для быстрых решений под давлением — без отказа от демократичного стиля. Вы научитесь переключаться между режимами."
+  },
+  C: {
+    name: "Коучинговый лидер",
+    color: "#0f6e56",
+    desc: "Вы — наставник. Развиваете людей, верите в их потенциал, задаёте вопросы вместо директив. Ваша сила — долгосрочный рост команды. Риск: слишком медленно для операционных задач.",
+    traits: [
+      { icon: "❤️", name: "Эмпатия", desc: "Понимаете людей на глубоком уровне" },
+      { icon: "🌱", name: "Развитие", desc: "Команда стабильно растёт под вашим руководством" },
+      { icon: "📈", name: "Зона роста", desc: "Чёткость позиции и директивность там, где это нужно" }
+    ],
+    cta: "Тренинг поможет сочетать коучинговый стиль с жёсткостью там, где это необходимо — и говорить об этом убедительно перед любой аудиторией."
+  },
+  L: {
+    name: "Делегирующий лидер",
+    color: "#854f0b",
+    desc: "Вы — архитектор системы. Нанимаете лучших, даёте свободу, не мешаете. Работает с профессионалами. Риск: команда теряет вектор без чёткого сигнала сверху.",
+    traits: [
+      { icon: "🔌", name: "Доверие к команде", desc: "Профессионалы ценят вашу свободу и пространство" },
+      { icon: "⚙️", name: "Системность", desc: "Вы строите, а не управляете вручную" },
+      { icon: "📈", name: "Зона роста", desc: "Регулярная обратная связь и поддержка менее опытных" }
+    ],
+    cta: "Тренинг покажет, как оставаться в роли архитектора и при этом удерживать команду в фокусе — без микроменеджмента."
+  }
+};
+
+const labels = { A: "Директивный", D: "Демократичный", C: "Коучинговый", L: "Делегирующий" };
+const colors = { A: "#E24B4A", D: "#185fa5", C: "#0f6e56", L: "#854f0b" };
+const letters = ["А","Б","В","Г"];
+
+let current = 0;
+let answers = Array(10).fill(null);
+
+function render() {
+  const q = questions[current];
+  const pct = Math.round((current + 1) / 10 * 100);
+  document.getElementById("prog-fill").style.width = pct + "%";
+  document.getElementById("prog-pct").textContent = pct + "%";
+  document.getElementById("prog-label").textContent = "Вопрос " + (current + 1) + " из 10";
+  document.getElementById("q-num").textContent = "Вопрос " + (current + 1) + " из 10";
+  document.getElementById("q-text").textContent = q.text;
+  document.getElementById("warn").style.display = "none";
+
+  document.getElementById("btn-prev").disabled = current === 0;
+  document.getElementById("btn-next").textContent = current === 9 ? "Узнать результат →" : "Далее →";
+
+  let html = "";
+  q.opts.forEach((o, i) => {
+    const sel = answers[current] === i ? " selected" : "";
+    html += `<button class="opt${sel}" onclick="select(${i})">
+      <span class="opt-letter">${letters[i]}</span>
+      <span class="opt-text">${o.text}</span>
+    </button>`;
+  });
+  document.getElementById("options").innerHTML = html;
+}
+
+function select(i) {
+  answers[current] = i;
+  document.getElementById("warn").style.display = "none";
+  render();
+}
+
+function next() {
+  if (answers[current] === null) {
+    document.getElementById("warn").style.display = "block";
+    return;
+  }
+  if (current < 9) { current++; render(); }
+  else { showResult(); }
+}
+
+function prev() {
+  if (current > 0) { current--; render(); }
+}
+
+function showResult() {
+  const counts = { A: 0, D: 0, C: 0, L: 0 };
+  answers.forEach((a, qi) => {
+    if (a !== null) counts[questions[qi].opts[a].type]++;
+  });
+  const dominant = Object.keys(counts).sort((a, b) => counts[b] - counts[a])[0];
+  const p = profiles[dominant];
+
+  document.getElementById("quiz").style.display = "none";
+  document.getElementById("result").style.display = "block";
+
+  document.getElementById("accent-bar").style.background = p.color;
+  document.getElementById("result-name").textContent = p.name;
+  document.getElementById("result-desc").textContent = p.desc;
+
+  // Scores
+  let scHtml = "";
+  Object.keys(counts).forEach(k => {
+    const pct = Math.round(counts[k] / 10 * 100);
+    scHtml += `<div class="score-row">
+      <span class="score-label">${labels[k]}</span>
+      <div class="score-track"><div class="score-fill" style="width:${pct}%;background:${colors[k]}"></div></div>
+      <span class="score-val">${pct}%</span>
+    </div>`;
+  });
+  document.getElementById("scores").innerHTML = scHtml;
+
+  // Traits
+  let trHtml = p.traits.map(t => `<div class="trait">
+    <div class="trait-icon">${t.icon}</div>
+    <p class="trait-name">${t.name}</p>
+    <p class="trait-desc">${t.desc}</p>
+  </div>`).join("");
+  document.getElementById("traits").innerHTML = trHtml;
+
+  // CTA
+  document.getElementById("cta-block").innerHTML = `
+    <h3>📅 Тренинг «Лидер нового типа» — Астана</h3>
+    <p>${p.cta}<br><br>2 дня офлайн · группа до 15 человек · Астана</p>
+    <div class="cta-btns">
+      <a href="mailto:samatpanov@gmail.com?subject=Тренинг по лидерству" class="btn btn-primary">Записаться на тренинг</a>
+      <a href="https://www.linkedin.com/in/samatpanov" target="_blank" class="btn">LinkedIn Самата →</a>
+    </div>`;
+
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function restart() {
+  current = 0;
+  answers = Array(10).fill(null);
+  document.getElementById("quiz").style.display = "block";
+  document.getElementById("result").style.display = "none";
+  render();
+}
+
+render();
+</script>
+</body>
+</html>
